@@ -17,6 +17,13 @@ git 本地仓库 ，学习。
 郭 2  
 
 魏 2 
-
+的地方为
 
  再增加一行
+git config --global i18n.commitEncoding utf-8
+    git config --global i18n.logOutputEncoding utf-8解决.前者设置提交时, message 以什么编码保存. 后者设置查看时, message 以什么编码传递给查看器.
+
+作者：Zombie110year
+链接：https://www.zhihu.com/question/57162172/answer/547538054
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
