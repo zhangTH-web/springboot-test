@@ -1,0 +1,60 @@
+server:
+  port: 8080
+mybatis: 
+   mapper-locations: classpath*:/com/xino/dao/mybatis/mapper/*Mapper.xml
+   type-aliases-package: com.xino.dao.mybatis.bean
+   configuration:  
+     map-underscore-to-camel-case: true
+ # 底下这种写法不知道为什么会报    Invalid bound statement (not found)
+#     mapper-locations: com/xino/dao/mybatis/mapper/*Mapper.xml
+#     mapper-locations:  mybatis/**/*Mapper.xml
+#     type-aliases-package: com.xino.dao.mybatis.bean
+spring: 
+  datasource: 
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.0.1.160:3306/kms_activiti2?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 0591xino
+    
+   #redis配置 
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    jedis: 
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0 
+    #quartz 配置
+    quartz:
+    #持久化到数据库方式
+    job-store-type: jdbc
+    initialize-schema: embedded
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: MyScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true     
+logging: 
+  level: 
+    com.xino.dao.mybatis: debug
+    
+#debug : true     
